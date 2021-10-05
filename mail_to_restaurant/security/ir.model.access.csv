@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_restaurant_mailing_user,access.restaurant.mailing.user,model_restaurant_mailing,,1,1,1,1
+access_restaurant_mailing_system,access.restaurant.mailing.system,model_restaurant_mailing,base.group_system,1,1,1,1

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+		<record model="mail.template" id="restaurant_weekly_payment_mail_template">
+			<field name="name">Restaurant Weekly Payment EMail Notification</field>
+			<field name="model_id" ref="mail_to_restaurant.model_restaurant_mailing"/>
+			<field name="email_from">${object.email_from | safe}</field>
+			<field name="subject">${object.subject}</field>
+			<field name="email_to">${ctx.get('email_to')}</field>
+			<field name="email_cc">${ctx.get('email_cc')}</field>
+			<field name="body_html" type="html">
+				<div>
+					<p>Dear ${object.partner_id.name or ''},</p>
+					<h2>Your Payout</h2>
+					<p>
+					${object.partner_id.name}<br/>
+					% if object.partner_id.street1:
+            			${object.partner_id.street1}<br/>
+        			% endif
+        			% if object.partner_id.city:
+            			${object.partner_id.city}<br/>
+        			% endif
+					Rest. ID - ${object.yelo_restaurant_id}<br/>
+					% if object.partner_id.vat:
+            			${object.partner_id.vat}<br/>
+        			% endif
+					</p>
+					<h4>Statement Period : ${object.payout_start_date} - ${object.payout_end_date}</h4>
+					% if ctx.get('orders'):
+						<table width="771" cellspacing="1" cellpadding="4" border="1" height="73">
+							<thead>
+								<tr style="font-weight:bold;background-color: #00CED1">
+									<th align="center">Payout on</th>
+									<th align="center">Order Amount</th>
+									<th align="center">Payout Amount</th>
+									<th align="center">Total Orders</th>
+								</tr>
+							</thead>
+							<tbody>
+								% for val in  ctx['orders'] :
+									<tr style="background-color: #E0FFFF">
+										<td valign="middle" align="center">${val['payout_on']}</td>
+										<td valign="middle" align="right">${val['order_amount']}</td>
+										<td valign="middle" align="right">${val['payout_amount']}</td>
+										<td valign="middle" align="center">${val['total_orders']}</td>
+									</tr>
+								% endfor
+							</tbody>
+						</table>
+
+					% endif
+					<h4>Total Payout : ${format_amount(object.final_payment, object.user_id.company_id.currency_id)}</h4>
+					<p>Thank you</p>
+
+				</div>
+			</field>
+		</record>
+	</data>
+</odoo>

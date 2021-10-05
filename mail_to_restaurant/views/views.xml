@@ -1,0 +1,142 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_mail_restaurant_mailing_search">
+            <field name="name">restaurant.mailing.search</field>
+            <field name="model">restaurant.mailing</field>
+            <field name="arch" type="xml">
+                <search string="Mailings">
+                    <field name="subject" string="Mailing"
+                           filter_domain="[('subject', 'ilike', self)]"/>
+                    <filter string="My Mailings" name="assigned_to_me"
+                            domain="[('user_id', '=', uid)]"
+                            help="Mailings that are assigned to me"/>
+                    <separator/>
+                    <filter name="filter_sent_date" date="sent_date"/>
+                    <separator/>
+                    <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Status" name="group_state" context="{'group_by': 'state'}"/>
+                        <filter string="Sent By" name="sent_by" domain="[]" context="{'group_by': 'email_from'}"/>
+                        <separator/>
+                        <filter string="Sent Period" name="sent_date" domain="[]" context="{'group_by': 'sent_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_mail_restaurant_mailing_tree">
+            <field name="name">restaurant.mailing.tree</field>
+            <field name="model">restaurant.mailing</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <tree string="Mailings" sample="1">
+                    <field name="subject" attrs="{'readonly': [('state', 'in', ('sending', 'done'))]}"/>
+                    <field name="user_id" widget="many2one_avatar_user"/>
+                    <field name="schedule_date" string="Scheduled" widget="remaining_days"/>
+                    <field name="sent_date" widget="date"/>
+                    <field name="state" decoration-info="state == 'draft' or state == 'in_queue'"
+                           decoration-success="state == 'sending' or state == 'done'" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_mail_restaurant_mailing_form">
+            <field name="name">restaurant.mailing.form</field>
+            <field name="model">restaurant.mailing</field>
+            <field name="arch" type="xml">
+                <form string="Mailing">
+                    <header style="min-height:31px;">
+                        <button name="action_put_in_queue" type="object"
+                                attrs="{'invisible': [('state', 'in', ('in_queue', 'done'))]}" class="oe_highlight"
+                                string="Send"
+                                confirm="This will send the email to all recipients. Do you still want to proceed ?"/>
+<!--                        <button name="action_test" type="object" class="btn-secondary" string="Test"/>-->
+<!--                        <button name="action_cancel" type="object" attrs="{'invisible': [('state', '!=', 'in_queue')]}"-->
+<!--                                class="btn-secondary" string="Cancel"/>-->
+<!--                        <button name="action_retry_failed" type="object"-->
+<!--                                attrs="{'invisible': ['|', ('state', '!=', 'done'), ('failed', '=', 0)]}"-->
+<!--                                class="oe_highlight" string="Retry"/>-->
+
+                        <field name="state" readonly="1" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                attrs="{'invisible': [('active', '=', True)]}"/>
+                        <group>
+                            <field name="active" invisible="1"/>
+                            <field name="subject" string="Subject"
+                                   attrs="{'readonly': [('state', 'in', ('sending', 'done'))]}" widget="char_emojis"
+                                   placeholder="e.g. New Sale on all T-shirts"/>
+                            <field name="date" readonly="1" class="oe_inline"/>
+                            <field name="email_from"
+                                               attrs="{'readonly': [('state', 'in', ('sending', 'done'))]}"/>
+                            <field name="email_to"/>
+                            <field name="recipient_ids" widget="many2many_tags"/>
+                            <field name="email_cc"/>
+                        </group>
+                        <notebook>
+<!--                            <page string="Mail Body" name="mail_body">-->
+<!--                                <field name="body_html" class="oe_read_only" widget="html"-->
+<!--                                       options="{'cssReadonly': 'mass_mailing.iframe_css_assets_readonly'}"/>-->
+<!--                                <field name="body_arch" class="o_mail_body oe_edit_only" widget="mass_mailing_html"-->
+<!--                                       options="{-->
+<!--                                        'snippets': 'mass_mailing.email_designer_snippets',-->
+<!--                                        'cssEdit': 'mass_mailing.iframe_css_assets_edit',-->
+<!--                                        'inline-field': 'body_html'-->
+<!--                                }" attrs="{'readonly': [('state', 'in', ('sending', 'done'))]}"/>-->
+<!--                            </page>-->
+                            <page string="Payout Details"
+                                  name="payout_details">
+                                <div style="vertical-align: top;">
+                                    Payout - Period
+                                    <field name="payout_start_date" class="oe_inline"/>
+                                     -
+                                    <field name="payout_end_date" class="oe_inline"/>
+                                </div>
+                                <group>
+                                    <field name="partner_id"/>
+                                    <field name="yelo_restaurant_id"/>
+                                    <field name="food_cost"/>
+                                    <field name="gst"/>
+                                    <field name="commission_rate" invisible="1"/>
+                                    <field name="commission_amt"/>
+                                    <field name="final_payment"/>
+                                    <field name="total_orders"/>
+                                </group>
+                            </page>
+                            <page string="Advanced" name="advanced">
+                                <group>
+                                    <group>
+                                        <field name="id" invisible="1"/>
+                                        <field name="user_id" readonly="1"/>
+                                        <field name="sent_date" readonly="1"/>
+                                        <field name="schedule_date" attrs="{'invisible': [('state', 'in', ('in_queue', 'done'))]}"/>
+                                        <field name="attachment_ids" widget="many2many_binary" string="Attach a file" class="oe_inline"
+                                        attrs="{'readonly': [('state', 'in', ('sending', 'done'))]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="message_ids"/>
+                        <field name="activity_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record id="restaurant_mailing_action_mail" model="ir.actions.act_window">
+            <field name="name">Mailings</field>
+            <field name="res_model">restaurant.mailing</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{
+                'default_user_id': uid,
+                }
+            </field>
+        </record>
+        <menuitem name="Emails" id="restaurant_payments_emails"
+                  parent="payment_to_restaurant.restaurant_payment_base_menu"
+                  action="restaurant_mailing_action_mail" sequence="3"/>
+    </data>
+</odoo>
