@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_monthly_invoice_to_restaurant_monthly_invoice_to_restaurant,monthly_invoice_to_restaurant.monthly_invoice_to_restaurant,model_monthly_invoice_to_restaurant_monthly_invoice_to_restaurant,base.group_user,1,1,1,1

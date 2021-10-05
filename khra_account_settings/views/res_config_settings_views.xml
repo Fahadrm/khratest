@@ -1,0 +1,390 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="res_config_settings_view_form">
+            <field name="name">res.config.settings.view.form.inherit.account</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <div id="analytic" position="after">
+                    <h2>Accounting Entries</h2>
+                    <div class="row mt16 o_settings_container" id="partner_accounting_entries">
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="customer_accounting_entries"
+                             title="These accounts are set in contacts(customers)."
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Customer Account</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Account Receivable" for="customer_receivable_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="customer_receivable_account_id"
+                                               domain="[('deprecated', '=', False), ('internal_type', '=', 'receivable'), ('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Account Payable" for="customer_payable_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="customer_payable_account_id"
+                                               domain="[('deprecated', '=', False), ('internal_type', '=', 'payable'), ('company_id', '=', company_id)]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="delivery_boy_accounting_entries"
+                             title="These accounts are set in contacts(delivery boy)."
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Delivery Boy Account</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Account Receivable" for="delivery_boy_receivable_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="delivery_boy_receivable_account_id"
+                                               domain="[('deprecated', '=', False), ('internal_type', '=', 'receivable'), ('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Account Payable" for="delivery_boy_payable_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="delivery_boy_payable_account_id"
+                                               domain="[('deprecated', '=', False), ('internal_type', '=', 'payable'), ('company_id', '=', company_id)]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!--                        <div class="col-12 col-lg-6 o_setting_box"-->
+<!--                             id="rezoy_accounting_entries"-->
+<!--                             title="These accounts are set in contacts(rezoy)."-->
+<!--                             groups="account.group_account_user">-->
+<!--                            <div class="o_setting_left_pane"/>-->
+<!--                            <div class="o_setting_right_pane">-->
+<!--                                <span class="o_form_label">Rezoy Account</span>-->
+<!--                                <div class="content-group">-->
+<!--                                    <div class="row mt16">-->
+<!--                                        <label string="Account Receivable" for="rezoy_receivable_account_id"-->
+<!--                                               class="col-lg-3 o_light_label"/>-->
+<!--                                        <field name="rezoy_receivable_account_id"-->
+<!--                                               domain="[('deprecated', '=', False), ('internal_type', '=', 'receivable'), ('company_id', '=', company_id)]"/>-->
+<!--                                    </div>-->
+<!--                                    <div class="row">-->
+<!--                                        <label string="Account Payable" for="rezoy_payable_account_id"-->
+<!--                                               class="col-lg-3 o_light_label"/>-->
+<!--                                        <field name="rezoy_payable_account_id"-->
+<!--                                               domain="[('deprecated', '=', False), ('internal_type', '=', 'payable'), ('company_id', '=', company_id)]"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="restaurant_accounting_entries"
+                             title="These accounts are set in contacts(restaurant)."
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Restaurant Account</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Account Receivable" for="restaurant_receivable_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="restaurant_receivable_account_id"
+                                               domain="[('deprecated', '=', False), ('internal_type', '=', 'receivable'), ('company_id', '=', company_id)]"/>
+                                    </div>
+                                    <div class="row">
+                                        <label string="Account Payable" for="restaurant_payable_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="restaurant_payable_account_id"
+                                               domain="[('deprecated', '=', False), ('internal_type', '=', 'payable'), ('company_id', '=', company_id)]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="order_processed_accounting_entries"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Order Processed(Sales)</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Order Processed" for="order_processed_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="order_processed_account_id"
+                                               domain="[('deprecated', '=', False),('company_id', '=', company_id)]"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="razor_pay_accounting_entries"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Razor Pay Account</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Razor Pay Account" for="razor_pay_payment_gateway_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="razor_pay_payment_gateway_account_id"
+                                               domain="[('deprecated', '=', False), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="customer_wallet_accounting_entries"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Customer Wallet Account</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Customer Wallet Account" for="customer_wallet_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="customer_wallet_account_id"
+                                               domain="[('deprecated', '=', False), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="promotion_accounting_entries"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Promotion Account</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Promotion Account" for="promotion_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="promotion_account_id"
+                                               domain="[('deprecated', '=', False), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="food_gst_accounting_entries"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Food GST Account</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Food GST Account" for="food_gst_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="food_gst_account_id"
+                                               domain="[('deprecated', '=', False), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="delivery_charge_accounting_entries"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Delivery Charge Account</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Delivery Charge Account" for="delivery_charge_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="delivery_charge_account_id"
+                                               domain="[('deprecated', '=', False), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="surge_accounting_entries"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Delivery Charge Surge Account</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Delivery Charge Surge Account" for="surge_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="surge_account_id"
+                                               domain="[('deprecated', '=', False), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="tip_accounting_entries"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Tip Account</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Tip Account" for="tip_account_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="tip_account_id"
+                                               domain="[('deprecated', '=', False), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="yelo_first_entry_journal"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">First Entry Journal</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="First Entry Journal" for="yelo_first_entry_journal_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="yelo_first_entry_journal_id"
+                                               domain="[('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="yelo_second_entry_journal"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Second Entry Journal</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Second Entry Journal" for="yelo_second_entry_journal_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="yelo_second_entry_journal_id"
+                                               domain="[('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="yelo_third_entry_journal"
+                             groups="account.group_account_user">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Third Entry Journal</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Third Entry Journal" for="yelo_third_entry_journal_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="yelo_third_entry_journal_id"
+                                               domain="[('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <h2>Yelo Default Taxes</h2>
+                    <div class="row mt16 o_settings_container" id="yelo_accounting_entries_default_taxes">
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="yelo_delivery_charge_tax">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Delivery Charge Tax</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Tax" for="delivery_charge_tax_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="delivery_charge_tax_id"
+                                               domain="[('type_tax_use', 'in', ('sale', 'all')), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="yelo_delivery_charge_surge_tax">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Surge Tax</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Surge Tax" for="surge_tax_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="surge_tax_id"
+                                               domain="[('type_tax_use', 'in', ('sale', 'all')), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="yelo_restaurant_tcs_tax">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Restaurant TCS Tax</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Restaurant TCS Tax" for="tcs_tax_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="tcs_tax_id"
+                                               domain="[('type_tax_use', 'in', ('sale', 'all')), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="yelo_restaurant_tds_tax">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Restaurant TDS Tax</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Restaurant TDS Tax" for="tds_tax_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="tds_tax_id"
+                                               domain="[('type_tax_use', 'in', ('sale', 'all')), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box"
+                             id="yelo_commission_tax">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Commission Tax</span>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label string="Commission Tax" for="commission_tax_id"
+                                               class="col-lg-3 o_light_label"/>
+                                        <field name="commission_tax_id"
+                                               domain="[('type_tax_use', 'in', ('sale', 'all')), ('company_id', '=', company_id)]"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

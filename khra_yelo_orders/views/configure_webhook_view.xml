@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+        <record id="configure_webhook_view_form" model="ir.ui.view">
+            <field name="name">Configure Webhook Form</field>
+            <field name="model">configure.webhook</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="tookan_agent_profile_url"/>
+                            <field name="tookan_api_key"/>
+                        </group>
+                        <group>
+                            <field name="webhook_auth_key"/>
+                            <field name="request_url"/>
+                            <field name="api_key"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree(list) View -->
+        <record id="configure_webhook_view_tree" model="ir.ui.view">
+            <field name="name">Configure Webhook List</field>
+            <field name="model">configure.webhook</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="request_url"/>
+                    <field name="api_key"/>
+                    <field name="tookan_agent_profile_url"/>
+                    <field name="tookan_api_key"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='configure_webhook_action' model='ir.actions.act_window'>
+            <field name="name">Configure Webhook</field>
+            <field name="res_model">configure.webhook</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Webhook" id="webhook_base_menu" parent="base.menu_custom" sequence='1'/>
+        <menuitem name="Configure Webhook" id="webhook_configure_menu" parent="webhook_base_menu" action="configure_webhook_action"/>
+    </data>
+</odoo>

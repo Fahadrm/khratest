@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_yelo_orders,yelo.orders,model_yelo_orders,base.group_user,1,1,1,1
+user_webhook_configuration,Webhook Config Access,model_configure_webhook,,1,1,1,1

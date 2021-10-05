@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="yelo_orders_view_form" model="ir.ui.view">
+            <field name="name">Yelo Order Form</field>
+            <field name="model">yelo.orders</field>
+            <field name="arch" type="xml">
+                <form >
+                    <group>
+                        <group>
+                            <field name="yelo_order_id"/>
+                            <field name="yelo_order_date"/>
+                            <field name="yelo_customer_id"/>
+                            <field name="yelo_restaurant_id"/>
+                            <field name="yelo_order_type"/>
+                            <field name="yelo_order_status"/>
+                        </group>
+                        <group>
+                            <field name="sync_status"/>
+                            <field name="customer_order_entry_status"/>
+                            <field name="payment_type_status"/>
+                            <field name="restaurant_entry_status"/>
+                            <field name="invoice_status"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree(list) View -->
+        <record id="yelo_orders_view_tree" model="ir.ui.view">
+            <field name="name">Yelo Order List</field>
+            <field name="model">yelo.orders</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="yelo_order_id"/>
+                    <field name="yelo_order_date"/>
+                    <field name="yelo_customer_id"/>
+                    <field name="yelo_restaurant_id"/>
+                    <field name="yelo_order_type"/>
+                    <field name="sync_status"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='yelo_orders_action' model='ir.actions.act_window'>
+            <field name="name">Yelo Orders</field>
+            <field name="res_model">yelo.orders</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="KHRA" id="khra_base_menu"/>
+        <menuitem name="Orders" id="yelo_orders_menu" parent="khra_base_menu" action="yelo_orders_action"/>
+    </data>
+</odoo>

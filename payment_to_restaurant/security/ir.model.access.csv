@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_restaurant_payment_batch,restaurant.payment.batch,model_restaurant_payment_batch,base.group_user,1,1,1,1
+access_restaurant_payments,restaurant.payments,model_restaurant_payments,base.group_user,1,1,1,1
+access_restaurant_payment_register,access.restaurant.payment.register,model_restaurant_payment_register,,1,1,1,0

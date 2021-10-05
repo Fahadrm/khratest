@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="yelo_products_view_form" model="ir.ui.view">
+            <field name="name">Yelo Products Form</field>
+            <field name="model">yelo.products</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="yelo_product_id"/>
+                            <field name="yelo_order_id"/>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree(list) View -->
+        <record id="yelo_products_view_tree" model="ir.ui.view">
+            <field name="name">Yelo Products List</field>
+            <field name="model">yelo.products</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="yelo_product_id"/>
+                    <field name="yelo_order_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='yelo_products_action' model='ir.actions.act_window'>
+            <field name="name">Yelo Products</field>
+            <field name="res_model">yelo.products</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Yelo" id="yelo_base_menu"/>
+        <menuitem name="Products" id="yelo_products_menu" parent="yelo_base_menu" action="yelo_products_action"/>
+    </data>
+</odoo>

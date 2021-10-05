@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="partner_view_type">
+            <field name="name">partner.view.type</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="partner_type"/>
+                    <field name="yelo_customer_id" attrs="{'invisible':[('partner_type','!=','customer')], 'required': [('partner_type','=','customer')]}"/>
+                    <field name="yelo_restaurant_id" attrs="{'invisible':[('partner_type','!=','restaurant')], 'required': [('partner_type','=','restaurant')]}"/>
+                    <field name="yelo_delivery_boy_id" attrs="{'invisible':[('partner_type','!=','delivery_boy')], 'required': [('partner_type','=','delivery_boy')]}"/>
+                    <field name="restaurant_type" attrs="{'invisible':[('partner_type','!=','restaurant')]}"/>
+                    <field name="restaurant_commission" attrs="{'invisible':[('partner_type','!=','restaurant')]}"/>
+
+<!--                    <field name="account_properties_partner_type"/>-->
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
